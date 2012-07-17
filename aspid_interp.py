@@ -39,7 +39,7 @@ class AspidInterpreter:
             'NUMERIC':r'\d+'
         }
         # characters to scape
-        self.metacharacters = '[](){}<>.+*?|$^'.split()
+        self.metacharacters = '[ ] ( ) { } < > . + * | $ ^'.split()
 
     # Run it
     def run(self):
@@ -84,10 +84,11 @@ class AspidInterpreter:
                 st_group = statement[1]
             elif type(statement[1]) is tuple :
                 st_group = statement[1][0]
-                
+            
+            # en caso de tratarce de un rango, reemplaza el : por -
             if st_group.find(':') != -1:
                 st_group = st_group.replace(':','-')
-            #st_group = st_group[1:-1] # quita los parentesis del str del grupo
+            
             elements = st_group.split(',') # separa los elementos            
             # si es una expresion OR
             if OR :
@@ -96,23 +97,29 @@ class AspidInterpreter:
                 
             if len(elements) > 1 :
                 # por cada elemento itera y va generando la regexp correspondiente
-                print elements
-                result.append('[')
+                result.append('[') # parentesis de inicio del grupo
                 for element in elements :
                     if len(element) == 1 :
-                        if element in self.metacharacters :
-                            result.append('\%s' % element)
-                        else:
-                            result.append('%s' % element)
+                        print 'len 1>',element, self.metacharacters 
+                        # si el catacter actual es un metacaracter
+                        # le antepone la barra invertida 
+                        result.append(
+                            ('\%s' % element) 
+                                if element in self.metacharacters 
+                                    else '%s' % element)
                     else:
-                        if element.find('-') != -1:
-                            result.append('%s' % element)
-                        else:
-                            result.append('(%s)' % element)
-                result.append(']')
+                        print 'len > 1 -->',element
+                        result.append(
+                            ('%s' % element)
+                                if element.find('-') != -1
+                                    else ('(%s)' % element))
+                result.append(']') # parentesis de cierre del grupo
             else:
                 if len(elements[0]) == 1 :
-                    result.append(elements[0])
+                    result.append(
+                        ('\%s' % elements[0]) 
+                            if elements[0] in self.metacharacters
+                                else elements[0])
                 else:
                     result.append('[%s]' % elements[0])
             
@@ -122,14 +129,14 @@ class AspidInterpreter:
                 'COUNT'   : self.analize_group_count,
                 'EXCLUDE' : self.analize_group_exclude
             }
-            if type(statement[1]) is tuple:                
+            if type(statement[1]) is tuple:
                 result.append(
-                    cases[ statement[1][1][0] ]( statement[1][1] ) 
+                    cases[ statement[1][1][0] ]( statement[1][1] )
                 )
+                return '(%s)' % ''.join(result)
             return ''.join(result)
             
     def analize_group_count(self, statement):
-        #~ print 'analize_group_count>', statement
         quantifiers = {
             'ZEROORMORE':r'*',
             'ZEROORONE':r'?',

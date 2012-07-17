@@ -42,7 +42,8 @@ t_RPAREN      = r'\)'
 #~ t_RBRACKET    = r'\]'
 t_DOT         = r'.'
 #t_GROUP       = r"(\[)(([a-zA-Z0-9]:[a-zA-Z0-9]|[a-zA-Z0-9]+),?)+(\])"
-t_GROUP       = r"(\[)([a-zA-Z0-9_-],?:?)+(\])"
+#~ t_GROUP       = r"(\[)([a-zA-Z0-9],?:?)+(\])"
+t_GROUP       = r"(\[)([a-zA-Z0-9\\#\\¡\\$:.,¿?+=&%@!-_],?:?)+(\])"
 t_INDEX_1     = r'\([0-9]\)'
 t_INDEX_2     = r'\([0-9]+:[0-9]*\)'
 t_STRING      = r'[\"|\']([^\\\n]|(\\.))*?[\"|\']'
@@ -59,7 +60,7 @@ def t_NEWLINE(t):
     return t
 
 def t_ID(t):
-    r'[a-zA-Z0-9]+'
+    r'[0-9a-zA-Z]+'
     if t.value in keywords:
         t.type = t.value
     return t

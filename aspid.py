@@ -39,7 +39,7 @@ if len(sys.argv) == 2:
     if prog != 1 :
         aspid = aspid_interp.AspidInterpreter(prog)
         try:
-            print 'interpreter result> ', type(aspid.run()),aspid.run()
+            print 'interpreter result> ', aspid.run()
             raise SystemExit
         except RuntimeError:
             pass
@@ -62,41 +62,7 @@ if len(sys.argv) == 2:
         #~ if not line: continue
         #~ line += "\n"
         #~ prog = aspid_parse.parse(line)
-        #~ print prog    
-#~ else:
-    #~ while 1:
-        #~ try:
-            #~ line = raw_input("[ASPID] ")    
-        #~ except EOFError:
-            #~ raise SystemExit
-        #~ if not line: continue
-        #~ line += "\n"
-        #~ prog = aspid_parse.parse(line)
-        #~ print prog    
-        #~ aspid = aspid_interp.AspidInterpreter(prog)
-        #~ try:
-            #~ print aspid.run()
-            #~ raise SystemExit
-        #~ except RuntimeError:
-            #~ pass
-        
-        #~ 
-        #~ keys = list(prog)
-        #~ if keys[0] > 0:
-             #~ aspid.add_statements(prog)
-        #~ else:
-             #~ stat = prog[keys[0]]
-             #~ if stat[0] == 'RUN':
-                 #~ try:
-                     #~ b.run()
-                 #~ except RuntimeError:
-                     #~ pass
-             #~ elif stat[0] == 'LIST':
-                 #~ b.list()
-             #~ elif stat[0] == 'BLANK':
-                 #~ b.del_line(stat[1])
-             #~ elif stat[0] == 'NEW':
-                 #~ b.new()
+        #~ print prog
 
 def run(data):
     prog = aspid_parse.parse(data)
