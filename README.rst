@@ -12,8 +12,8 @@ The idea is to specify the rules that will have the pattern and, as a result, ge
 
 Technical features
 ------------
-Aspid uses [PLY](http://www.dabeaz.com/ply/) 3.4 (PLY is a pure-Python implementation of the popular compiler construction tools lex and yacc.).
-Download [here](http://www.dabeaz.com/ply/ply-3.4.tar.gz) a last version.
+Aspid uses `PLY`_ 3.4 (PLY is a pure-Python implementation of the popular compiler construction tools lex and yacc.).
+Download `here`_ a last version.
 
 Example to use
 ------------
@@ -37,6 +37,8 @@ To use the example, run it as follows:
    
 Documentation
 ------------
-Here a first version of documentation, available in [Spanish](http://db.tt/oVfWrNp5).
+Here a first version of documentation, available in `Spanish`_.
 
-
+.. _PLY: http://www.dabeaz.com/ply/
+.. _here: http://www.dabeaz.com/ply/ply-3.4.tar.gz
+.. _Spanish: http://db.tt/oVfWrNp5
