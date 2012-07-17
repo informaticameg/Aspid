@@ -1,0 +1,54 @@
+identifier ::= 
+             (letter|"_") (letter | digit | "_")*
+  
+letter ::= 
+             lowercase | uppercase
+  
+lowercase ::= 
+             "a"..."z"
+  
+uppercase ::= 
+             "A"..."Z"
+  
+digit ::= 
+             "0"..."9"
+
+string ::=
+            \"([^\\\n]|(\\.))*?\"
+            
+simple_stmt ::= 
+            group_stmt
+            
+simple_group_stmt ::=
+            [( identifier ",")*]
+            
+group_stmt ::=
+              simple_group_stmt
+            | simple_group_stmt "." "count" "(" index ")"
+            | simple_group_stmt "(" index ")"
+            | simple_group_stmt "exclude" "(" simple_group_stmt ")"
+            | [( [identifier | or_stmt | range_stmt] ",")*]
+
+range_stmt ::=
+            [( [numeric|alphabetic] ":" [numeric|alphabetic] )*]
+            
+index ::=
+            digit+ | -?digit+ ":" -?digit+ 
+            
+or_stmt ::=
+            "or" "(" group_stmt ")"
+
+not_stmt ::=
+            "not" "(" group_stmt ")"
+
+exclude_stmt ::=
+            "exclude" "(" group ")"
+            
+count_stmt ::=
+            "count" "(" index_stmt ")" | "count" "(" quantifiers_stmt ")"
+
+quantifiers_stmt ::=
+            "zero_or_more" | "one_or_more" | "zero_or_one"
+
+regexp_stmt ::=
+            "regexp" "(" string ")"
