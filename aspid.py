@@ -28,31 +28,21 @@ import aspid_lex
 import aspid_parse
 import aspid_interp
 
-# If a filename has been specified, we try to run it.
-# If a runtime error occurs, we bail out and enter
-# interactive mode below
 if len(sys.argv) == 2:
     data = open(sys.argv[1]).read()
     prog = aspid_parse.parse(data)
-    print 'exit prog>',prog
+    #~ print 'exit prog>',prog
     if not prog: raise SystemExit
     if prog != 1 :
         aspid = aspid_interp.AspidInterpreter(prog)
         try:
-            print 'interpreter result> ', aspid.run()
+            print 'ASPID result> ', aspid.run()
             raise SystemExit
         except RuntimeError:
             pass
 #~ 
 #~ else:
     #~ aspid = aspid_interp.AspidInterpreter({})
-
-# Interactive mode.  This incrementally adds/deletes statements
-# from the program stored in the BasicInterpreter object.  In
-# addition, special commands 'NEW','LIST',and 'RUN' are added.
-# Specifying a line number with no code deletes that line from
-# the program.
-
 #~ else:
     #~ while 1:
         #~ try:
@@ -66,12 +56,9 @@ if len(sys.argv) == 2:
 
 def run(data):
     prog = aspid_parse.parse(data)
-    print 'exit prog>',prog
-    #if not prog: raise SystemExit
     if prog != 1 :
         aspid = aspid_interp.AspidInterpreter(prog)
         try:
-            #~ print aspid.run()
             return aspid.run()
         except RuntimeError:
             return 1

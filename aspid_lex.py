@@ -41,8 +41,6 @@ t_RPAREN      = r'\)'
 #~ t_LBRACKET    = r'\['
 #~ t_RBRACKET    = r'\]'
 t_DOT         = r'.'
-#t_GROUP       = r"(\[)(([a-zA-Z0-9]:[a-zA-Z0-9]|[a-zA-Z0-9]+),?)+(\])"
-#~ t_GROUP       = r"(\[)([a-zA-Z0-9],?:?)+(\])"
 t_GROUP       = r"(\[)([a-zA-Z0-9\\#\\¡\\$:.,¿?+=&%@!-_],?:?)+(\])"
 t_INDEX_1     = r'\([0-9]\)'
 t_INDEX_2     = r'\([0-9]+:[0-9]*\)'

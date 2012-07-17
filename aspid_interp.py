@@ -25,7 +25,6 @@ class AspidInterpreter:
     # Initialize the interpreter. prog is a dictionary
     # containing (line_number,(statement)) mappings
     def __init__(self,prog):
-        print prog
         self.prog = prog
         self.result = r''
         
@@ -74,7 +73,6 @@ class AspidInterpreter:
 
     # Utility functions
     def analize_group(self, statement, OR = False):
-        #~ print '>'*10,'group ',statement
         result = []
         statement = list(statement)
         st_group = ''
@@ -100,7 +98,6 @@ class AspidInterpreter:
                 result.append('[') # parentesis de inicio del grupo
                 for element in elements :
                     if len(element) == 1 :
-                        print 'len 1>',element, self.metacharacters 
                         # si el catacter actual es un metacaracter
                         # le antepone la barra invertida 
                         result.append(
@@ -108,7 +105,6 @@ class AspidInterpreter:
                                 if element in self.metacharacters 
                                     else '%s' % element)
                     else:
-                        print 'len > 1 -->',element
                         result.append(
                             ('%s' % element)
                                 if element.find('-') != -1
