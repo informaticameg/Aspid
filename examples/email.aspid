@@ -1,0 +1,9 @@
+# ASPID Example
+#
+# ejemplo de como obtener la expresion regular para un email
+
+[a:z,0:9,_,.,-].COUNT(ONEORMORE)
+[@]
+[0:9,a:z,.,-].COUNT(ONEORMORE)
+[.]
+[a:z,.].COUNT(2:6)
